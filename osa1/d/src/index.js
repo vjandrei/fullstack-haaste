@@ -16,45 +16,45 @@ const App = () => {
   const badText = "bad" 
 
   // tallenna napit omaan tilaansa
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-  const [allClicks, setAll] = useState(0)
+  const [goodValue, setGood] = useState(0)
+  const [neutralValue, setNeutral] = useState(0)
+  const [badValue, setBad] = useState(0)
+  const [badNegativeValue, setBadSum] = useState(0)
+  const [allClicksCount, setAll] = useState(0)
   
-  const [value, setValue] = useState()
-
   const clickGood = (newValue) => {
-    setValue(newValue)
-    setGood(good + 1) 
-    setAll(allClicks + 1)
+    setGood(goodValue + newValue) 
+    setAll(allClicksCount + newValue)
   }
 
   const clickNeutral = (newValue) => { 
-    setValue(newValue)
-    setNeutral(neutral + 1)
-    setAll(allClicks + 1)
+    setNeutral(neutralValue + newValue)
+    setAll(allClicksCount + newValue)
   }
 
   const clickDad = (newValue) => { 
-    setValue(newValue)
-    setBad(bad + 1)
-    setAll(allClicks + 1)
+    setBad(badValue + newValue)
+    setBadSum(badNegativeValue - newValue)
+    setAll(allClicksCount + newValue)
   }
+
+  let average = (goodValue + badNegativeValue) / allClicksCount;
+  let positive = (goodValue / allClicksCount) * 100;
 
   return (
     <div>
         <h1>Give feedback</h1>
         <Button handleClick={() => clickGood(1)}  name={goodText} />
-        <Button handleClick={() => clickNeutral(0)}  name={neutralText} />
-        <Button handleClick={() => clickDad(-1)}  name={badText} />
+        <Button handleClick={() => clickNeutral(1)}  name={neutralText} />
+        <Button handleClick={() => clickDad(1)}  name={badText} />
         <h1>Statistic</h1>
         <ul>
-            <li>Good: {good} {value}</li>
-            <li>Neutral: {neutral}</li>
-            <li>Dad: {bad}</li>
-            <li>All: {allClicks}</li>
-            <li>Average:</li>
-            <li>Positive: </li>
+            <li>Good: {goodValue}</li>
+            <li>Neutral: {neutralValue}</li>
+            <li>Dad: {badValue}</li>
+            <li>All: {allClicksCount}</li>
+            <li>Average: {average}</li>
+            <li>Positive: {positive}%</li>
         </ul>
     </div>
   )
