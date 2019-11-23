@@ -19,25 +19,42 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  const [allClicks, setAll] = useState(0)
+  
+  const [value, setValue] = useState()
 
-  const clickGood = () => { setGood(good + 1)}
-  const clickNeutral = () => { setNeutral(neutral + 1)}
-  const clickDad = () => { setBad(bad + 1)}
-  
-  
+  const clickGood = (newValue) => {
+    setValue(newValue)
+    setGood(good + 1) 
+    setAll(allClicks + 1)
+  }
+
+  const clickNeutral = (newValue) => { 
+    setValue(newValue)
+    setNeutral(neutral + 1)
+    setAll(allClicks + 1)
+  }
+
+  const clickDad = (newValue) => { 
+    setValue(newValue)
+    setBad(bad + 1)
+    setAll(allClicks + 1)
+  }
 
   return (
     <div>
         <h1>Give feedback</h1>
-        <Button handleClick={clickGood}  name={goodText} />
-        <Button handleClick={clickNeutral}  name={neutralText} />
-        <Button handleClick={clickDad}  name={badText} />
+        <Button handleClick={() => clickGood(1)}  name={goodText} />
+        <Button handleClick={() => clickNeutral(0)}  name={neutralText} />
+        <Button handleClick={() => clickDad(-1)}  name={badText} />
         <h1>Statistic</h1>
         <ul>
-            <li>Good: {good}</li>
+            <li>Good: {good} {value}</li>
             <li>Neutral: {neutral}</li>
             <li>Dad: {bad}</li>
-            <li>All: </li>
+            <li>All: {allClicks}</li>
+            <li>Average:</li>
+            <li>Positive: </li>
         </ul>
     </div>
   )
