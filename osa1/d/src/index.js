@@ -2,20 +2,24 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const Button = ({handleClick, name}) => {
-    return (
-        <div>
-            <button onClick={handleClick}>{name}</button>
-        </div>
-    )
+  return (
+    <div>
+        <button onClick={handleClick}>{name}</button>
+    </div>
+  )
 }
 
-const Statistic = (props) => {
+const Statistic = ({value, name, percentage}) => {
   return (
-    <li>{props.name} {props.value}</li>
+    <tr>
+      <td>{name}</td>
+      <td>{value} {percentage}</td>
+    </tr>
   )
 }
 
 const Statistics = (props) => {
+  const { good, neutral, bad, clicks, average, positive } = props
   if(props.clicks === 0 ){
     return (
       <div>
@@ -24,14 +28,16 @@ const Statistics = (props) => {
     )
   } 
   return (
-    <ul>
-      <Statistic name="Good" value={props.good}/> 
-      <Statistic name="Neutral" value={props.neutral}/>
-      <Statistic name="Dad" value={props.bad}/>
-      <Statistic name="All" value={props.clicks}/>
-      <Statistic name="Average" value={props.average}/>
-      <Statistic name="Positive" value={props.positive}/>
-    </ul>
+    <table>
+        <tbody>
+        <Statistic name="Good" value={good}/> 
+        <Statistic name="Neutral" value={neutral}/>
+        <Statistic name="Dad" value={bad}/>
+        <Statistic name="All" value={clicks}/>
+        <Statistic name="Average" value={average}/>
+        <Statistic name="Positive" value={positive} percentage="%"/>
+        </tbody>
+    </table>
   )
 }
 
