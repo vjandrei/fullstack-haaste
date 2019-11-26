@@ -2,11 +2,21 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const Button = ({handleClick, name}) => {
+    
     return (
         <div>
             <button onClick={handleClick}>{name}</button>
         </div>
     )
+}
+
+const Statistic = (props) => {
+  
+  return (
+    <div>
+      <li>{props.name} {props.value}</li>
+    </div>
+  )
 }
 
 const App = () => {
@@ -21,7 +31,7 @@ const App = () => {
   const [badValue, setBad] = useState(0)
   const [badNegativeValue, setBadSum] = useState(0)
   const [allClicksCount, setAll] = useState(0)
-  
+
   const clickGood = (newValue) => {
     setGood(goodValue + newValue) 
     setAll(allClicksCount + newValue)
@@ -40,6 +50,7 @@ const App = () => {
 
   let average = (goodValue + badNegativeValue) / allClicksCount;
   let positive = (goodValue / allClicksCount) * 100;
+  
 
   return (
     <div>
@@ -49,12 +60,12 @@ const App = () => {
         <Button handleClick={() => clickDad(1)}  name={badText} />
         <h1>Statistic</h1>
         <ul>
-            <li>Good: {goodValue}</li>
-            <li>Neutral: {neutralValue}</li>
-            <li>Dad: {badValue}</li>
-            <li>All: {allClicksCount}</li>
-            <li>Average: {average}</li>
-            <li>Positive: {positive}%</li>
+            <Statistic name="Good" value={goodValue}/> 
+            <Statistic name="Neutral" value={neutralValue}/>
+            <Statistic name="Dad" value={badValue}/>
+            <Statistic name="All" value={allClicksCount}/>
+            <Statistic name="Average" value={average}/>
+            <Statistic name="Positive" value={positive}/>
         </ul>
     </div>
   )
