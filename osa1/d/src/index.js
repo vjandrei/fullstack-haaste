@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const Button = ({handleClick, name}) => {
-    
     return (
         <div>
             <button onClick={handleClick}>{name}</button>
@@ -11,11 +10,28 @@ const Button = ({handleClick, name}) => {
 }
 
 const Statistic = (props) => {
-  
   return (
-    <div>
-      <li>{props.name} {props.value}</li>
-    </div>
+    <li>{props.name} {props.value}</li>
+  )
+}
+
+const Statistics = (props) => {
+  if(props.clicks === 0 ){
+    return (
+      <div>
+        No feeback given
+      </div>
+    )
+  } 
+  return (
+    <ul>
+      <Statistic name="Good" value={props.good}/> 
+      <Statistic name="Neutral" value={props.neutral}/>
+      <Statistic name="Dad" value={props.bad}/>
+      <Statistic name="All" value={props.clicks}/>
+      <Statistic name="Average" value={props.average}/>
+      <Statistic name="Positive" value={props.positive}/>
+    </ul>
   )
 }
 
@@ -59,14 +75,14 @@ const App = () => {
         <Button handleClick={() => clickNeutral(1)}  name={neutralText} />
         <Button handleClick={() => clickDad(1)}  name={badText} />
         <h1>Statistic</h1>
-        <ul>
-            <Statistic name="Good" value={goodValue}/> 
-            <Statistic name="Neutral" value={neutralValue}/>
-            <Statistic name="Dad" value={badValue}/>
-            <Statistic name="All" value={allClicksCount}/>
-            <Statistic name="Average" value={average}/>
-            <Statistic name="Positive" value={positive}/>
-        </ul>
+        <Statistics 
+         good={goodValue} 
+         neutral={neutralValue} 
+         bad={badValue}
+         clicks={allClicksCount}
+         average={average}
+         positive={positive}
+        />
     </div>
   )
 }
