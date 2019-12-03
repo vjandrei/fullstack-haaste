@@ -12,7 +12,6 @@ const AnecdoteButton = ({handleClick, text}) => {
 
 const App = (props) => {
   const buttonText = 'Show next anecdote';
-  const randomNumber = Math.floor(Math.random() * anecdotes.length);
   const randomNumber = () => Math.floor(Math.random() * anecdotes.length);
   
   const [selected, setSelected] = useState(0)
